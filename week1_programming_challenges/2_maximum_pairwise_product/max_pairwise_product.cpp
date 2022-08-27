@@ -16,6 +16,32 @@ int MaxPairwiseProduct(const std::vector<int>& numbers) {
     return max_product;
 }
 
+std::vector<int> ArrayLargestSecondLargest(const std::vector<int> &numbers)
+{
+    std::vector<int> largest_second_largest(2, INT_MIN);
+    int n = numbers.size();
+    for (int counter = 0; counter < n; counter++)
+    {
+        if (numbers[counter] > largest_second_largest[0])
+        {
+            largest_second_largest[1] = largest_second_largest[0];
+            largest_second_largest[0] = numbers[counter];
+        }
+        if ((numbers[counter] > largest_second_largest[1]) && (numbers[counter] < largest_second_largest[0]))
+        {
+            largest_second_largest[1] = numbers[counter];
+        }
+    }
+    return largest_second_largest;
+}
+
+int MaxPairwiseProductFast(const std::vector<int> &numbers)
+{
+    std::vector<int> largest_second_largest = ArrayLargestSecondLargest(numbers);
+    return largest_second_largest[0] * largest_second_largest[1];
+}
+
+
 int main() {
     int n;
     std::cin >> n;
