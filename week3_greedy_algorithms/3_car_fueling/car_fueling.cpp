@@ -3,16 +3,45 @@
 
 using std::cin;
 using std::cout;
-using std::vector;
 using std::max;
+using std::vector;
 
-int compute_min_refills(int dist, int tank, vector<int> & stops) {
+//O(n) n is the number of stations
+int compute_min_refills(int dist, int tank, vector<int> &stops)
+{
     // write your code here
-    return -1;
+    int refills = 0;
+    int car_location = 0;
+
+    if (dist <= tank)
+        return refills;
+
+    // get greedy
+    int i = stops.size() - 1;
+    while (tank < dist - car_location)
+    {
+        //get the furthest safe point the car can reach
+        while (tank < stops[i] - car_location && i != -1 && car_location != stops[i]){
+            i--;
+        }
+        //check for the safe move
+        if (i == -1 || car_location == stops[i]){
+            //that's not a safe move
+            refills = -1;
+            break;
+        }
+
+        //this is a safe move
+        car_location = stops[i];
+        refills++;
+        i = stops.size() - 1;   
+    }
+
+    return refills;
 }
 
-
-int main() {
+int main()
+{
     int d = 0;
     cin >> d;
     int m = 0;
