@@ -21,7 +21,7 @@ int get_fibonacci_last_digit_naive(int n)
 int get_fibonacci_last_digit_fast(int n)
 {
     if (n <= 1)
-        return n;
+        return n;    
 
     int fib_before_prev = 0; // Fibonacci(n-2) % 10
     int fib_prev = 1;        // Fibonacci(n-1) % 10
